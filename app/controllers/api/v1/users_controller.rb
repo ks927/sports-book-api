@@ -17,7 +17,7 @@ module Api
                 if user.save
                     render json: { status: 'SUCCESS', message: 'user created!', data:user }, status: :ok
                 else 
-                    render json: { status: 'ERROR', message: 'user not created!', data:user.errors }, status: :unprocessable_entity
+                    render json: { status: 'ERROR', message: 'user not created!', data:user.errors.full_messages }, status: :unprocessable_entity
 
                 end
             end
@@ -33,7 +33,7 @@ module Api
                 if user.update_attributes(user_params)
                     render json: { status: 'SUCCESS', message: 'user updated!', data:user }, status: :ok
                 else 
-                    render json: { status: 'ERROR', message: 'user not updated!', data:user.errors }, status: :unprocessable_entity
+                    render json: { status: 'ERROR', message: 'user not updated!', data:user.errors.full_messages }, status: :unprocessable_entity
 
                 end
             end
@@ -41,7 +41,7 @@ module Api
             private
 
             def user_params
-                params.permit(:name, :email)
+                params.permit(:name, :email, :password)
             end
         end
     end
