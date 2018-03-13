@@ -24,10 +24,12 @@ class UserTest < ActiveSupport::TestCase
   assert_not @user.valid?
  end
 
- test 'email should be valid' do
-  @user.email = "example@google"
-  assert_not @user.valid?
- end
+ test "email addresses should be unique" do
+  duplicate_user = @user.dup
+   duplicate_user.email = @user.email
+   @user.save
+   assert_not duplicate_user.valid?
+end
 
  test 'password should be proper length' do
   @user.password = "foo"
