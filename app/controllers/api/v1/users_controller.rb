@@ -11,7 +11,7 @@ module Api
                 render json: { status: 'SUCCESS', message: 'user loaded', data:user }, status: :ok
             end
 
-            def create
+            def register
                 user = User.new(user_params)
 
                 if user.save
